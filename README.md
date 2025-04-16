@@ -97,7 +97,7 @@ healthcare-app/
 ### 📦 Backend Setup
 
 ```bash
-cd server
+cd backend
 npm install
 
 ```
@@ -114,7 +114,7 @@ npm run dev
 
 ### 💻 Frontend Setup
 ```bash
-cd client
+cd frontend
 npm install
 npm run dev
 ```
