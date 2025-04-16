@@ -192,19 +192,19 @@ DELETE /admin/reject-doctor/:doctorId
 
 # 🧪 Screenshots
 ### ✅ Login 
-![page 1](frontend2\public\login.png)
+![page 1](frontend/public/login.png)
 ### ✅ Signup
-![This is an example caption](frontend2\public\Signup.png)
+![This is an example caption](frontend/public/Signup.png)
 ### 👤 User Dashboard
-![This is an example caption](frontend2\public\Dashboard.png)
+![This is an example caption](frontend/public/Dashboard.png)
 ### 💻 Navigation Bar
-![This is an example caption](frontend2\public\NavigationBar.png)
+![This is an example caption](frontend/public/NavigationBar.png)
 ### 📅 Appointments
-![page 5](frontend2\public\apponitment.png)
+![page 5](frontend/public/apponitment.png)
 ### 📝 Prescriptions
-![page 5](frontend2\public\Prescription.png)
+![page 5](frontend/public/Prescription.png)
 ### 👤 Profile
-![page 5](frontend2\public\profile.png)
+![page 5](frontend/public/profile.png)
 
 
 ## 🧑‍💻 Contributors
