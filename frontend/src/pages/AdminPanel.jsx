@@ -13,7 +13,7 @@ const AdminPanel = () => {
     const fetchUsers = async () => {
       try {
         setLoading(true)
-        const response = await axios.get("/admin/users")
+        const response = await axios.get("/users")
         setUsers(response.data)
       } catch (err) {
         setError("Failed to fetch users")

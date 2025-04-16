@@ -94,7 +94,7 @@ export const emergencyContactService = {
 // Admin Services
 export const adminService = {
   getUsers: async () => {
-    const response = await api.get('/admin/users');
+    const response = await api.get('/users');
     return response.data;
   },
   approveDoctor: async (doctorId) => {

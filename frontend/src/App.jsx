@@ -1,20 +1,28 @@
-"use client"
+"use client";
 
-import { BrowserRouter as Router, Routes, Route, Navigate, useNavigate } from "react-router-dom"
-import { ThemeProvider, createTheme } from "@mui/material"
-import { AuthProvider } from "./context/AuthContext"
-import Layout from "./components/Layout"
-import Login from "./pages/Login"
-import Signup from "./pages/Signup"
-import Dashboard from "./pages/Dashboard"
-import Appointments from "./pages/Appointments"
-import Prescriptions from "./pages/Prescriptions"
-import Reports from "./pages/Reports"
-import Profile from "./pages/Profile"
-import ProtectedRoute from "./components/ProtectedRoute"
-import EmergencyContacts from "./pages/EmergencyContacts"
-import { setNavigate } from "./utils/navigation"
-import { useEffect } from "react"
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Navigate,
+  useNavigate,
+} from "react-router-dom";
+import { ThemeProvider, createTheme } from "@mui/material";
+import { AuthProvider } from "./context/AuthContext";
+import Layout from "./components/Layout";
+import Login from "./pages/Login";
+import Signup from "./pages/Signup";
+import Dashboard from "./pages/Dashboard";
+import Appointments from "./pages/Appointments";
+import Prescriptions from "./pages/Prescriptions";
+import Reports from "./pages/Reports";
+import Profile from "./pages/Profile";
+import ProtectedRoute from "./components/ProtectedRoute";
+import EmergencyContacts from "./pages/EmergencyContacts";
+import { setNavigate } from "./utils/navigation";
+import { useEffect } from "react";
+import AdminDashboard from "./pages/AdminDashboard";
+import AdminProtectedRoute from "./components/AdminProtectedRoute";
 
 const theme = createTheme({
   palette: {
@@ -25,14 +33,14 @@ const theme = createTheme({
       main: "#dc004e",
     },
   },
-})
+});
 
 function AppContent() {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   useEffect(() => {
-    setNavigate(navigate)
-  }, [navigate])
+    setNavigate(navigate);
+  }, [navigate]);
 
   return (
     <AuthProvider>
@@ -88,11 +96,20 @@ function AppContent() {
               </ProtectedRoute>
             }
           />
+          <Route
+            path="admin/dashboard"
+            element={
+              <AdminProtectedRoute>
+                <AdminDashboard />
+              </AdminProtectedRoute>
+            }
+          />
+
           <Route path="*" element={<Navigate to="/" replace />} />
         </Route>
       </Routes>
     </AuthProvider>
-  )
+  );
 }
 
 function App() {
@@ -102,7 +119,7 @@ function App() {
         <AppContent />
       </Router>
     </ThemeProvider>
-  )
+  );
 }
 
-export default App
+export default App;

@@ -15,6 +15,18 @@ const theme = createTheme({
     },
   },
 });
+// chart for AdminDashboard.jsx
+import {
+  Chart as ChartJS,
+  BarElement,
+  CategoryScale,
+  LinearScale,
+  Tooltip,
+  Legend,
+} from "chart.js"
+
+ChartJS.register(BarElement, CategoryScale, LinearScale, Tooltip, Legend)
+
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>

@@ -1,6 +1,7 @@
 "use client"
 
 import { Outlet } from "react-router-dom"
+import { Button } from "@mui/material"
 import {
   AppBar,
   Toolbar,
@@ -251,6 +252,7 @@ const Layout = () => {
               <MenuIcon />
             </IconButton>
           )}
+          
 
           <Box sx={{ display: "flex", alignItems: "center" }}>
             <LocalHospital sx={{ color: "primary.main", mr: 1.5, fontSize: 28 }} />
@@ -268,6 +270,23 @@ const Layout = () => {
               Healthcare Management
             </Typography>
           </Box>
+          {user?.role === "Admin" && (
+  <Box sx={{ ml: 2 }}>
+    <Button
+      variant="contained"
+      color="primary"
+      onClick={() => navigate("/admin/dashboard")}
+      sx={{
+        textTransform: "none",
+        borderRadius: 2,
+        fontWeight: "bold",
+      }}
+    >
+      Admin Dashboard
+    </Button>
+  </Box>
+)}
+
 
           {user && (
             <Box sx={{ ml: { xs: 1, md: 4 } }}>
