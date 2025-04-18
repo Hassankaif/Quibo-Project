@@ -28,12 +28,12 @@ const prescriptionRouter = require("./routes/prescription");
 const patientRouter = require("./routes/patient");
 
 app.use("/", authRouter);
-app.use("/", profileRouter);
-app.use("/", appointmentRouter);
-app.use("/", reportRouter);
-app.use("/", adminRouter);
-app.use("/", prescriptionRouter);
-app.use("/", patientRouter);
+// app.use("/", profileRouter);
+// app.use("/", appointmentRouter);
+// app.use("/", reportRouter);
+// app.use("/", adminRouter);
+// app.use("/", prescriptionRouter);
+// app.use("/", patientRouter);
 
 
 // app.get("*", (req, res) => {
