@@ -27,7 +27,7 @@ const adminRouter = require("./routes/admin");
 const prescriptionRouter = require("./routes/prescription");
 const patientRouter = require("./routes/patient");
 
-app.use("/", authRouter);
+// app.use("/", authRouter);
 // app.use("/", profileRouter);
 // app.use("/", appointmentRouter);
 // app.use("/", reportRouter);
