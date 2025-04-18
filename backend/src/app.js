@@ -2,6 +2,7 @@ const express = require("express");
 const path = require("path");
 const cookieParser = require("cookie-parser");
 const cors = require("cors");
+const mongoose = require("mongoose");
 
 // Import routers
 const authRouter = require("./routes/authentication");
@@ -12,43 +13,50 @@ const patientRouter = require("./routes/patient");
 const prescriptionRouter = require("./routes/prescription");
 const reportRouter = require("./routes/report");
 
+// Initialize express app
 const app = express();
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 7777;
 
-// Middleware
+// Configure middleware
 app.use(express.json());
 app.use(cookieParser());
 app.use(cors());
 
-// Static files for uploads
-app.use("/uploads", express.static(path.join(__dirname, "../uploads")));
+// Connect to MongoDB
+require("./config/database"); // Make sure this file exists and properly connects to your database
 
-// Mount API routes - make sure all routes start with '/'
+// Mount API routes with proper prefixes
 app.use("/api/auth", authRouter);
-app.use("/api/profile", profileRouter);
+app.use("/api", profileRouter); // Will handle /api/profile/view and /api/profile/edit
 app.use("/api/admin", adminRouter);
-app.use("/api/appointments", appointmentRouter);
+app.use("/api/appointment", appointmentRouter);
 app.use("/api/patient", patientRouter);
-app.use("/api/prescriptions", prescriptionRouter);
-app.use("/api/reports", reportRouter);
+app.use("/api", prescriptionRouter); // Will handle /api/prescription/my
+app.use("/api/report", reportRouter);
 
-// Fix for the prescription issue - ensure this path doesn't conflict with the above
-app.use("/api", prescriptionRouter); // This will properly handle '/api/prescription/my'
+// Ensure uploads directory exists
+const uploadsDir = path.join(__dirname, "../uploads");
+const fs = require("fs");
+if (!fs.existsSync(uploadsDir)) {
+  fs.mkdirSync(uploadsDir, { recursive: true });
+}
+
+// Serve static files for uploads
+app.use("/uploads", express.static(uploadsDir));
 
 // Serve frontend in production
 if (process.env.NODE_ENV === "production") {
   // Serve static files from the React frontend app
-  app.use(express.static(path.join(__dirname, "../../frontend/dist")));
+  const frontendBuildPath = path.join(__dirname, "../../frontend/dist");
+  app.use(express.static(frontendBuildPath));
 
   // Handle any requests that don't match the above
   app.get("*", (req, res) => {
-    res.sendFile(path.join(__dirname, "../../frontend/dist/index.html"));
+    res.sendFile(path.join(frontendBuildPath, "index.html"));
   });
 }
 
-// Connect to database
-require("./db/mongoose");
-
+// Start the server
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });

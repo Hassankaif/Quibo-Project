@@ -1,12 +1,20 @@
 {
-    "name": "quibo-project",
-    "version": "1.0.0",
-    "scripts": {
-      "start": "cd backend && node src/app.js",
-      "build": "npm install --prefix frontend && npm run build --prefix frontend && npm install --prefix backend"
-    },
-    "engines": {
-      "node": ">=16.0.0"
-    }
+  "name": "quibo-project",
+  "version": "1.0.0",
+  "description": "Medical appointment booking system",
+  "main": "index.js",
+  "engines": {
+    "node": ">=16.0.0"
+  },
+  "scripts": {
+    "start": "cd backend && node src/app.js",
+    "build": "npm install --prefix frontend && npm run build --prefix frontend && npm install --prefix backend"
+  },
+  "keywords": [
+    "medical",
+    "appointment",
+    "MERN"
+  ],
+  "author": "",
+  "license": "ISC"
 }
-

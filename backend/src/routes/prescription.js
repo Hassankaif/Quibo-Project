@@ -4,7 +4,7 @@ const Prescription = require("../models/prescription");
 const prescriptionRouter = express.Router();
 
 prescriptionRouter.post(
-  "/add",
+  "/prescription/add",
   userAuth,
   roleAuth(["Doctor"]),
   async (req, res) => {
@@ -31,15 +31,15 @@ prescriptionRouter.post(
   }
 );
 
-// Changed route path from "/prescription/my" to "/my"
-prescriptionRouter.get("/my", userAuth, async (req, res) => {
+// Fix: Ensure there is no route with a URL as the path
+prescriptionRouter.get("/prescription/my", userAuth, async (req, res) => {
   try {
     let prescriptions;
 
     if (req.user.role === "Doctor") {
-      prescriptions = await Prescription.find({ doctorId: req.user._id });
+      prescriptions = await Prescription.find({ doctorId: req.user._id }).populate("patientId", "firstName lastName");
     } else if (req.user.role === "Patient") {
-      prescriptions = await Prescription.find({ patientId: req.user._id });
+      prescriptions = await Prescription.find({ patientId: req.user._id }).populate("doctorId", "firstName lastName");
     } else if (req.user.role === "Admin") {
       prescriptions = []; 
     } else {
