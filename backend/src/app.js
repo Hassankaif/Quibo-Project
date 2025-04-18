@@ -1,20 +1,24 @@
 const express = require("express");
 const connectDB = require("./config/database");
-const app = express();
 const cookieParser = require("cookie-parser");
 const cors = require("cors");
+const path = require("path");
 
-// middleware to convert json data to js object
+const app = express();
+
+// Middleware
 app.use(express.json());
-// middleware to read cookies
 app.use(cookieParser());
-// middleware to enable cross-origin resource sharing
-app.use(cors({
-  origin: "http://localhost:5173",//frontend url
-  credentials: true,
-}));
 
-// routes
+// CORS — allow all origins for now (you can later restrict this to your frontend URL)
+app.use(
+  cors({
+    origin: "*",
+    credentials: true,
+  })
+);
+
+// Routes
 const authRouter = require("./routes/authentication");
 const profileRouter = require("./routes/profile");
 const appointmentRouter = require("./routes/appointment");
@@ -23,7 +27,6 @@ const adminRouter = require("./routes/admin");
 const prescriptionRouter = require("./routes/prescription");
 const patientRouter = require("./routes/patient");
 
-// using routes
 app.use("/", authRouter);
 app.use("/", profileRouter);
 app.use("/", appointmentRouter);
@@ -32,17 +35,22 @@ app.use("/", adminRouter);
 app.use("/", prescriptionRouter);
 app.use("/", patientRouter);
 
+// Serve React static files from client/dist
+app.use(express.static(path.join(__dirname, "../client/dist")));
 
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "../client/dist/index.html"));
+});
 
+// Connect to database and start server
 connectDB()
   .then(() => {
     console.log("Database Connected");
-    app.listen(7777, () => {
-      console.log("Server is running on port 7777");
+    const PORT = process.env.PORT || 7777;
+    app.listen(PORT, () => {
+      console.log(`Server running on port ${PORT}`);
     });
   })
   .catch((err) => {
-    console.log("Error in connecting database");
+    console.log("Error connecting to the database:", err);
   });
-
-

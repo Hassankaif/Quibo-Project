@@ -199,6 +199,8 @@ DELETE /admin/reject-doctor/:doctorId
 ![This is an example caption](frontend/src/assets/Dashboard.png)
 ### 💻 Navigation Bar
 ![This is an example caption](frontend/src/assets/NavigationBar.png)
+### 🧑‍⚕️ Admin Panel
+![Admin panel](frontend/src/assets/admin.jpeg)
 ### 📅 Appointments
 ![page 5](frontend/src/assets/apponitment.png)
 ### 📝 Prescriptions
