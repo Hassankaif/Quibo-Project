@@ -36,21 +36,29 @@ app.use("/", prescriptionRouter);
 app.use("/", patientRouter);
 
 
-
-// Serve static files from frontend/dist
-app.use(express.static(path.resolve(__dirname, "../../../frontend/dist")));
-
 // app.get("*", (req, res) => {
 //   res.sendFile(path.resolve(__dirname, "../../../frontend/dist/index.html"));
 // });
-const frontendPath = path.join(__dirname, "../../../frontend/dist", "index.html");
 
-app.use((req, res, next) => {
-  if (req.method === "GET" && !req.path.startsWith("/api") && !req.path.startsWith("/uploads")) {
-    res.sendFile(frontendPath);
-  } else {
-    next();
-  }
+
+// const frontendPath = path.join(__dirname, "../../../frontend/dist", "index.html");
+
+// app.use((req, res, next) => {
+//   if (req.method === "GET" && !req.path.startsWith("/api") && !req.path.startsWith("/uploads")) {
+//     res.sendFile(frontendPath);
+//   } else {
+//     next();
+//   }
+// });
+
+const distPath = path.join(__dirname, "../frontend/dist");
+
+// Serve static files
+app.use(express.static(distPath));
+
+// React fallback
+app.get("*", (req, res) => {
+  res.sendFile(path.join(distPath, "index.html"));
 });
 
 
