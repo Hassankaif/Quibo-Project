@@ -15,7 +15,7 @@ const reportRouter = require("./routes/report");
 
 // Initialize express app
 const app = express();
-const PORT = process.env.PORT || 7777;
+const PORT = process.env.PORT || 3000;
 
 // Configure middleware
 app.use(express.json());
