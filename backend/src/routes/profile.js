@@ -3,8 +3,8 @@ const profileRouter = express.Router();
 const { userAuth } = require("../middlewares/auth");
 const { validateEditProfileData } = require("../utils/validate");
 
-// profile of user
-profileRouter.get("/profile/view", userAuth, async (req, res) => {
+// Changed route path from "/profile/view" to "/view"
+profileRouter.get("/view", userAuth, async (req, res) => {
   try {
     const user = req.user;
     res.send(user);
@@ -13,8 +13,8 @@ profileRouter.get("/profile/view", userAuth, async (req, res) => {
   }
 });
 
-// update profile of user
-profileRouter.patch("/profile/edit", userAuth, async (req, res) => {
+// Changed route path from "/profile/edit" to "/edit"
+profileRouter.patch("/edit", userAuth, async (req, res) => {
   try {
     if (!validateEditProfileData(req)) {
       throw new Error("Invalid data");

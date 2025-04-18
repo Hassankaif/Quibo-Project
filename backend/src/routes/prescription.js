@@ -30,7 +30,9 @@ prescriptionRouter.post(
     }
   }
 );
-prescriptionRouter.get("/prescription/my", userAuth, async (req, res) => {
+
+// Changed route path from "/prescription/my" to "/my"
+prescriptionRouter.get("/my", userAuth, async (req, res) => {
   try {
     let prescriptions;
 
