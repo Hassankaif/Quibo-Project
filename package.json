@@ -1,0 +1,12 @@
+{
+    "name": "quibo-project",
+    "version": "1.0.0",
+    "scripts": {
+      "start": "cd backend && node src/app.js",
+      "build": "npm install --prefix frontend && npm run build --prefix frontend && npm install --prefix backend"
+    },
+    "engines": {
+      "node": ">=16.0.0"
+    }
+}
+
