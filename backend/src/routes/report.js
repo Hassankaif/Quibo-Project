@@ -55,4 +55,3 @@ reportRouter.get("/view/:patientId", userAuth, roleAuth(["Doctor", "Patient"]), 
 module.exports = reportRouter;
 
 
-module.exports = reportRouter;
