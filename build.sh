@@ -8,9 +8,9 @@ echo "Installing frontend dependencies..."
 cd frontend
 npm install
 
-echo "Building frontend with explicit path to vite..."
-# Use the local vite from node_modules
-./node_modules/.bin/vite build
+echo "Building frontend with npm..."
+# Use npm to run the vite command through package.json
+NODE_ENV=production npm run build
 
 echo "Installing backend dependencies..."
 cd ../backend
