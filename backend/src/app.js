@@ -43,9 +43,16 @@ app.use(express.static(path.resolve(__dirname, "../../../frontend/dist")));
 // app.get("*", (req, res) => {
 //   res.sendFile(path.resolve(__dirname, "../../../frontend/dist/index.html"));
 // });
-app.get("/*", function (req, res) {
-  res.sendFile(path.join(__dirname, "../../../frontend/dist/index.html"));
+const frontendPath = path.join(__dirname, "../../../frontend/dist", "index.html");
+
+app.use((req, res, next) => {
+  if (req.method === "GET" && !req.path.startsWith("/api") && !req.path.startsWith("/uploads")) {
+    res.sendFile(frontendPath);
+  } else {
+    next();
+  }
 });
+
 
 
 
